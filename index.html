@@ -3,869 +3,722 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SRC Schedule - August 2026</title>
+<title>SRC Schedule - September 2026</title>
 <style>
-  :root {
-    --isr: #2563eb; --us: #7c3aed; --off: #cbd5e1;
-    --page-bg: #f4f6f9; --card-bg: #ffffff; --border: #e2e8f0; --text: #1e293b; --muted: #64748b; --muted-bg: #f1f5f9;
-    --daycell-min: 158px; --daycell-pad: 7px; --slot-font: 11px; --badge-font: 9px; --daynum-font: 11px;
-  }
-  html[data-theme="dark"] {
-    --isr: #3b82f6; --us: #a78bfa;
-    --page-bg: #0b1220; --card-bg: #1a2332; --border: #334155; --text: #e5e9f0; --muted: #94a3b8; --muted-bg: #26324a;
-  }
-  html[data-size="small"] {
-    --daycell-min: 128px; --daycell-pad: 5px; --slot-font: 10px; --badge-font: 8px; --daynum-font: 10px;
-  }
-  html[data-size="large"] {
-    --daycell-min: 210px; --daycell-pad: 12px; --slot-font: 13px; --badge-font: 10.5px; --daynum-font: 13px;
-  }
-  * { box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    background: var(--page-bg); color: var(--text); margin: 0; padding: 14px; max-width: 100%; overflow-x: hidden; }
-  .page { max-width: 1400px; margin: 0 auto; }
-  h1 { font-size: 22px; margin: 0 0 4px 0; }
-  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 16px; display:flex; align-items:center; gap:8px; }
+:root{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --muted:#64748b;
+  --accent:#4f46e5;
+  --danger:#dc2626;
+  --am-bg:#dbeafe;
+  --am-fg:#1e40af;
+  --pm-bg:#ede9fe;
+  --pm-fg:#5b21b6;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding:14px;
+  max-width:100%;
+  overflow-x:hidden;
+}
+.page{max-width:1400px;margin:0 auto;}
+h1{font-size:22px;margin:0 0 4px 0;}
+.subtitle{color:var(--muted);font-size:13px;margin:0 0 14px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+#savedTag{
+  opacity:0;
+  transition:opacity .25s ease;
+  background:#dcfce7;
+  color:#166534;
+  font-size:11px;
+  font-weight:600;
+  padding:2px 8px;
+  border-radius:999px;
+}
+#savedTag.show{opacity:1;}
 
-  details.rules { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
-    padding: 10px 18px; margin-bottom: 18px; font-size: 13px; line-height: 1.6; color: var(--text); }
-  details.rules summary { cursor: pointer; font-weight: 700; color: var(--muted); padding: 4px 0; }
-  details.rules .rules-body { margin-top: 10px; }
+.panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:14px;
+}
+.panel h2{font-size:14px;margin:0 0 8px 0;}
+.panel p{font-size:12.5px;color:var(--muted);margin:4px 0;line-height:1.5;}
 
-  .controls {
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
-    padding: 12px 16px; margin-bottom: 16px;
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  }
-  .control-group { flex: 1 1 140px; min-width: 0; }
-  .control-group label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
-  .control-group select {
-    font-size: 13px; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border);
-    background: var(--muted-bg); color: var(--text); width: 100%; min-width: 0; font-family: inherit;
-  }
-  .clear-btn {
-    background: var(--muted-bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px;
-    padding: 7px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer; align-self: flex-end;
-  }
-  .clear-btn:hover { filter: brightness(0.95); }
-  .admin-btn { background: #eef2ff; border-color: #c7d2fe; color: #3730a3; }
-  .reset-btn { background: #fff7ed; border-color: #fdba74; color: #9a3412; }
-  .theme-btn { background: var(--muted-bg); border-color: var(--border); color: var(--text); font-size: 16px; padding: 6px 12px; }
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:14px;
+}
+.controls label{font-size:11px;color:var(--muted);display:block;margin-bottom:2px;}
+.control-group{flex:1 1 140px;min-width:0;}
+select, button, input{
+  font-family:inherit;
+  font-size:13px;
+}
+.controls select{
+  width:100%;
+  flex:1 1 140px;
+  min-width:0;
+  padding:6px 8px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  color:var(--text);
+}
+.control-group input[type="date"]{
+  width:100%;
+  padding:6px 8px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  color:var(--text);
+}
+.btn{
+  padding:7px 14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  cursor:pointer;
+  white-space:nowrap;
+  color:var(--text);
+}
+.btn:hover{background:#f1f5f9;}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.btn-primary:hover{background:#4338ca;}
+.btn-danger{color:var(--danger);border-color:#fecaca;}
+.btn-danger:hover{background:#fef2f2;}
 
-  .worker-key {
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px 20px; margin-bottom: 18px; font-size: 15px;
-    display: flex; flex-wrap: wrap; gap: 14px 26px; color: var(--text);
-  }
-  .wkey { display: flex; align-items: center; gap: 12px; font-weight: 700; position: relative;
-    padding: 10px 20px; background: var(--muted-bg); border-radius: 999px; white-space: nowrap; flex: 0 0 auto; }
-  .wkey span:last-child { white-space: nowrap; overflow: visible; }
-  .wkey-dot { width: 20px; height: 20px; border-radius: 50%; display: inline-block; flex-shrink: 0; cursor: pointer; border: 2px solid var(--card-bg); box-shadow: 0 0 0 1px var(--border); }
-  .palette { display: none; position: absolute; top: 30px; left: 0; z-index: 30; background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.18); flex-wrap: wrap; gap: 6px; width: 150px; }
-  .palette.show { display: flex; }
-  .palette .swatch { width: 20px; height: 20px; border-radius: 5px; cursor: pointer; border: 1px solid rgba(0,0,0,0.1); }
+.key-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  margin-bottom:14px;
+  font-size:12.5px;
+}
+.key-item{display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;}
 
-  .summary {
-    display: none;
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 18px; margin-bottom: 18px; font-size: 13px; color: var(--text);
-  }
-  .summary.show { display: block; }
-  .summary h3 { margin: 0 0 8px 0; font-size: 14px; }
-  .summary-stats { display: flex; gap: 20px; flex-wrap: wrap; }
-  .stat { background: var(--muted-bg); border-radius: 8px; padding: 8px 14px; min-width: 90px; text-align: center; }
-  .stat .n { font-size: 20px; font-weight: 800; }
-  .stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; }
-  .stat.isr .n { color: var(--isr); }
-  .stat.us .n { color: var(--us); }
-  .stat.off .n { color: var(--muted); }
+.summary{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:14px;
+}
+.stat-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 16px;
+  flex:1 1 160px;
+  min-width:0;
+}
+.stat-card .num{font-size:22px;font-weight:700;}
+.stat-card .label{font-size:11.5px;color:var(--muted);}
 
-  .calendar-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
-  table { border-collapse: separate; border-spacing: 4px; width: 100%; min-width: calc(var(--daycell-min) * 7 + 100px); table-layout: fixed; }
-  td { vertical-align: top; }
-  .weeklabel { width: 56px; font-size: 10px; font-weight: 700; color: var(--muted);
-    text-align: right; padding-right: 5px; line-height: 1.4; }
-  .daycell { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
-    padding: var(--daycell-pad); min-width: var(--daycell-min); transition: opacity 0.15s, min-width 0.15s; }
-  .empty { background: transparent; }
-  .daynum { font-size: var(--daynum-font); font-weight: 700; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
-  .daynum-n { color: var(--text); }
-  .slots { display: flex; flex-direction: column; gap: 4px; }
-  .slot-row { display: flex; align-items: center; gap: 5px; transition: opacity 0.15s; }
-  .slot-row.hidden-row { display: none; }
-  .slot-badge {
-    font-size: var(--badge-font); font-weight: 800; padding: 3px 5px;
-    border-radius: 4px; white-space: nowrap; min-width: 62px; text-align: center;
-  }
-  .slot-badge.isr { background: var(--isr); color: #fff; }
-  .slot-badge.us { background: var(--us); color: #fff; }
-  .slot-row select {
-    flex: 1; width: 100%; font-size: var(--slot-font); font-family: inherit; border: 1px solid transparent;
-    border-radius: 5px; padding: 4px; font-weight: 600; cursor: pointer; outline: none;
-    text-align: center; text-align-last: center;
-  }
-  select.isr { background: #dbeafe; color: #1e3a8a; }
-  select.us { background: #ede9fe; color: #4c1d95; }
-  .slot-row.dup select { border: 1px solid #dc2626; background: #fee2e2 !important; color: #991b1b; }
-  .dup-tag { font-size: 8.5px; color: #dc2626; font-weight: 800; }
+.calendar-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--card);}
+table{border-collapse:collapse;min-width:1180px;table-layout:fixed;width:100%;}
+th, td{border:1px solid var(--border);vertical-align:top;}
+th{
+  background:#f1f5f9;
+  font-size:11.5px;
+  color:var(--muted);
+  padding:6px 4px;
+  text-align:center;
+  font-weight:600;
+}
+td{min-width:158px;padding:6px;}
+td.empty{background:#fafafa;}
+.week-label-cell{
+  background:#f8fafc;
+  font-size:11.5px;
+  color:var(--muted);
+  font-weight:600;
+  text-align:center;
+  padding:8px 4px;
+  white-space:nowrap;
+}
+.day-header{font-size:12px;font-weight:700;margin-bottom:6px;}
+.everyone-off{font-size:11.5px;color:var(--muted);font-style:italic;padding:6px 0;}
 
-  .slot-row.absent { gap: 5px; }
-  .absent-box {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-    background: var(--muted-bg); border: 1px dashed var(--muted); border-radius: 5px; padding: 4px 6px;
-    font-size: var(--slot-font); cursor: pointer; text-align: center;
-  }
-  .absent-name { text-decoration: line-through; color: var(--muted); font-weight: 700; }
-  .absent-reason { color: #dc2626; font-weight: 700; font-size: var(--badge-font); white-space: nowrap; }
-  .absent-undo { font-size: var(--badge-font); color: #2563eb; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.slot{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-bottom:5px;
+  border-radius:8px;
+  transition:opacity .15s ease, box-shadow .15s ease;
+}
+.slot.dim{opacity:.2;}
+.slot.dup-outline{box-shadow:0 0 0 2px var(--danger);border-radius:8px;position:relative;}
+.dup-tag{
+  background:var(--danger);
+  color:#fff;
+  font-size:9.5px;
+  font-weight:700;
+  padding:1px 5px;
+  border-radius:5px;
+  flex:none;
+}
+.badge{
+  font-size:10px;
+  font-weight:700;
+  padding:2px 5px;
+  border-radius:5px;
+  white-space:nowrap;
+  flex:none;
+}
+.badge-am{background:var(--am-bg);color:var(--am-fg);}
+.badge-pm{background:var(--pm-bg);color:var(--pm-fg);}
+.worker-select{
+  flex:1 1 auto;
+  min-width:0;
+  width:100%;
+  padding:4px 6px;
+  border:1px solid var(--border);
+  border-left:4px solid #ccc;
+  border-radius:6px;
+  background:#fff;
+  color:var(--text);
+  text-align:center;
+  text-align-last:center;
+}
+.absent-box{
+  flex:1 1 auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  border:1.5px dashed #cbd5e1;
+  border-radius:8px;
+  padding:4px 6px;
+  background:#f8fafc;
+  min-width:0;
+}
+.absent-name{
+  text-decoration:line-through;
+  font-size:12px;
+  font-weight:600;
+  flex:1 1 auto;
+  min-width:0;
+}
+.absent-label{
+  font-size:9.5px;
+  color:var(--muted);
+  background:#e2e8f0;
+  padding:1px 5px;
+  border-radius:5px;
+  flex:none;
+}
+.undo-btn{
+  font-size:10.5px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:5px;
+  padding:2px 6px;
+  cursor:pointer;
+  flex:none;
+}
 
-  .offbadges { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 3px; }
-  .offbadge {
-    font-size: var(--badge-font); background: var(--muted-bg); color: var(--muted); padding: 2px 6px;
-    border-radius: 4px; font-weight: 600; display: flex; align-items: center; gap: 4px;
-  }
-  .offbadge-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-  .offbadge.hidden-row { display: none; }
-  .offbadge.highlight { background: var(--border); color: var(--text); }
-  .all-off { font-size: 11px; color: var(--muted); font-style: italic; }
-  .legend { font-size: 13px; margin: 10px 0 14px 0; color: var(--text); }
-  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%;
-    margin: 0 4px 0 14px; vertical-align: middle; }
-  .dot.isr { background: var(--isr); }
-  .dot.us { background: var(--us); }
-  .dot.off { background: var(--off); }
-  th { font-size: 11px; color: var(--muted); padding-bottom: 2px; }
-  .saved-tag { font-size: 11px; color: #16a34a; font-weight: 600; opacity: 0; transition: opacity 0.3s; }
-  .saved-tag.show { opacity: 1; }
-  .weekrow.hidden-week { display: none; }
+.off-badges{margin-top:4px;display:flex;flex-direction:column;gap:3px;}
+.off-badge{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:10.5px;
+  color:var(--muted);
+  background:#f1f5f9;
+  border-radius:6px;
+  padding:2px 6px;
+  transition:opacity .15s ease;
+}
+.off-badge.hide-badge{display:none;}
 
-  .modal-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.45);
-    align-items: center; justify-content: center; z-index: 50;
-  }
-  .modal-overlay.show { display: flex; }
-  .modal-box {
-    background: var(--card-bg); color: var(--text); border-radius: 12px; padding: 22px 26px; width: 420px;
-    max-width: 90vw; box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-  }
-  .modal-box.small { width: 340px; }
-  .modal-box h3 { margin: 0 0 6px 0; font-size: 16px; }
-  .modal-sub { font-size: 12.5px; color: var(--muted); margin: 0 0 14px 0; line-height: 1.5; }
-  .modal-box input[type="password"] {
-    width: 100%; font-size: 14px; padding: 8px 10px; border: 1px solid var(--border);
-    border-radius: 6px; margin-bottom: 6px; font-family: inherit; background: var(--muted-bg); color: var(--text);
-  }
-  .modal-error { display: none; font-size: 12px; color: #dc2626; margin-bottom: 8px; }
-  .modal-error.show { display: block; }
-  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
-  .modal-btn { border-radius: 6px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
-  .modal-btn.primary { background: #4338ca; color: #fff; }
-  .modal-btn.primary:hover { background: #3730a3; }
-  .modal-btn.danger { background: #dc2626; color: #fff; }
-  .modal-btn.danger:hover { background: #b91c1c; }
-  .modal-btn.secondary { background: var(--muted-bg); color: var(--text); }
-  .modal-btn.secondary:hover { filter: brightness(0.95); }
-  .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
-  .admin-table th { text-align: center; color: var(--muted); font-size: 10.5px; padding: 5px 4px; border-bottom: 1px solid var(--border); }
-  .admin-table th.grp { font-size: 11px; color: var(--text); }
-  .admin-table td { padding: 6px 4px; border-bottom: 1px solid var(--muted-bg); text-align: center; }
-  .admin-table td:first-child { text-align: left; }
-  .admin-table .sep-col { border-left: 2px solid var(--border); }
+/* Admin modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(15,23,42,.5);
+  display:none;align-items:center;justify-content:center;z-index:1000;padding:14px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#fff;border-radius:12px;padding:18px;max-width:720px;width:100%;
+  max-height:85vh;overflow-y:auto;
+}
+.modal h3{margin:0 0 8px 0;font-size:16px;}
+.modal .note{font-size:11.5px;color:var(--muted);margin:8px 0;line-height:1.5;}
+.modal-close{float:right;cursor:pointer;background:none;border:none;font-size:18px;color:var(--muted);}
+.admin-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px;}
+.admin-table th, .admin-table td{border:1px solid var(--border);padding:6px 8px;text-align:center;}
+.admin-table th{background:#f1f5f9;}
+.admin-table td.name-cell{text-align:left;font-weight:600;}
+.pw-row{display:flex;gap:8px;margin-top:8px;}
+.pw-row input{flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:8px;}
+.error-text{color:var(--danger);font-size:12px;margin-top:6px;display:none;}
 
-  @media (max-width: 560px) {
-    body { padding: 10px; }
-    table { border-spacing: 0; min-width: 0; }
-    .calendar-scroll { overflow-x: visible; }
-    table tr:first-child { display: none; }
-    table, tbody, tr, td { display: block; width: 100%; }
-    tr.weekrow { margin-bottom: 14px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card-bg); }
-    .weeklabel { width: auto; text-align: left; padding: 8px 12px; background: var(--muted-bg); font-size: 12px; }
-    .daycell { border-radius: 0; border-left: none; border-right: none; border-top: 1px solid var(--border); }
-    td.empty { display: none; }
-  }
-
-  @media print {
-    html, body { padding: 0 !important; margin: 0 !important; background: #fff !important; color: #000 !important; height: auto !important; }
-    .page { max-width: none !important; margin: 0 !important; }
-    .controls, .worker-key, .summary, details.rules, .modal-overlay, .subtitle .saved-tag { display: none !important; }
-    h1 { margin: 0 0 4mm 0 !important; font-size: 14pt !important; }
-    .legend { margin: 0 0 3mm 0 !important; font-size: 8pt !important; }
-    .calendar-scroll { overflow: visible !important; }
-    table { min-width: 0 !important; width: 100% !important; border-spacing: 2px !important; zoom: 0.6; }
-    .daycell { padding: 3px !important; min-width: 0 !important; }
-    .weeklabel { font-size: 7pt !important; width: 42px !important; }
-    .daynum { font-size: 8pt !important; margin-bottom: 3px !important; }
-    .slot-badge { font-size: 7pt !important; min-width: 0 !important; padding: 1px 3px !important; }
-    .slot-row select { font-size: 8pt !important; padding: 1px 2px !important; }
-    .offbadge { font-size: 7pt !important; }
-    @page { size: landscape; margin: 5mm; }
-  }
+@media (max-width:560px){
+  .calendar-scroll{overflow-x:visible;}
+  table{min-width:0;}
+  table tr:first-child{display:none;}
+  table, tbody, tr, td{display:block;width:100%;}
+  tr.weekrow{margin-bottom:14px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  tr.weekrow .week-label-cell{border:none;border-bottom:1px solid var(--border);}
+  td.empty{display:none;}
+  td{border-left:none;border-right:none;}
+}
 </style>
 </head>
 <body>
-  <div class="page">
+<div class="page">
+  <h1>SRC Schedule - September 2026</h1>
+  <p class="subtitle">System Readiness Control · 6 workers · double-click a name to mark it absent <span id="savedTag">Saved</span></p>
 
-  <h1>SRC Schedule - August 2026</h1>
-  <div class="subtitle">
-    <span>System Readiness Control &middot; 6 workers &middot; double-click a name to mark it absent</span>
-    <span id="savedTag" class="saved-tag">Saved</span>
+  <div class="panel">
+    <h2>Staffing rules</h2>
+    <p><strong>Saturday:</strong> everyone off, no shifts scheduled.</p>
+    <p><strong>Sunday:</strong> 3 workers on 10:00-18:00 (Israel time). <strong>Monday-Thursday:</strong> all 6 work — 5 on 10:00-18:00 and 1 on 14:00-22:00 (the "US shift", still Israel-time hours, just named for who it serves). That 14:00-22:00 slot rotates through all 6 workers on a running counter across the whole month. <strong>Friday:</strong> 3 workers — 2 on 10:00-18:00, 1 on 14:00-22:00.</p>
+    <p>Weekend coverage is split into two fixed trios that alternate whole weekends: <strong>Group 1</strong> (Ivan Mladenovski, Djordje Krstic, Aleksandar Trajkovic) and <strong>Group 2</strong> (Petar Radakovic, Nikola Ristić, Nikola Petrov). Whichever group is "on" for a given weekend works both that Friday and the following Sunday together, then gets a full break — no weekend duty at all — until their next turn two weeks later. This month: Group 1 covers the weekends of 04/09-06/09 and 18/09-20/09; Group 2 covers 11/09-13/09 and 25/09-27/09. Every week still splits cleanly into one group on Sunday and the other on Friday, so everyone works exactly 5 days that week (4 Mon-Thu days plus one weekend shift).</p>
+    <p>Because September 1 falls on a Tuesday, the first calendar row only shows Tue-Sat (no Sun/Mon from August), and the last row only shows Sun-Wed (no Thu-Sat from October) — these are partial edge weeks.</p>
+    <p><strong>Time zones:</strong> shift times are defined in Israel local time (UTC+3, Israel Daylight Time applies through late September). Serbia is shown at CEST (UTC+2), US at Eastern Daylight Time (UTC-4), and UTC at +0. Use the "Display time zone" control below to convert every shift shown.</p>
+    <p><strong>Admin panel:</strong> once unlocked, you can pick any custom From/To date range to total up shifts and absences — it defaults to the first working day of August (Aug 2) through the last day of this schedule (Sep 30). August is included for reference only as the default rotation (no manual edits carried over); counts are always capped at today's date so future shifts aren't counted early.</p>
   </div>
-
-  <details class="rules">
-    <summary>Staffing rules (click to expand)</summary>
-    <div class="rules-body">
-      <b>Rules applied (default rotation):</b> the two working hours are 10:00-18:00 (Israel time) and 14:00-22:00 (US time). Sun = 3 workers, all 10:00-18:00. Mon-Thu = all 6 work (5 on 10:00-18:00 + 1 on 14:00-22:00), the 14:00-22:00 slot rotates day by day. Fri = 3 workers total, 2 on 10:00-18:00 + 1 on 14:00-22:00 - that slot rotates among that week's Friday group. Sat = everyone off.
-      <br><br>
-      Every worker works exactly 5 days/week: the 4 Mon-Thu days, plus either Sunday or Friday (never both). This also guarantees 2 consecutive days off every week: Friday+Saturday (if they work Sunday) or Saturday+Sunday (if they work Friday) - never a lone single day off. Two groups of 3 alternate Sunday vs. Friday duty week to week, and within the Friday group, who takes the 14:00-22:00 slot rotates too.
-      <br><br>
-      <b>Time zone note:</b> both shift times (10:00-18:00 and 14:00-22:00) are defined in Israel local time. Use the "Display time zone" control to see the same shifts converted into Serbia, US, or UTC time.
-    </div>
-  </details>
 
   <div class="controls">
     <div class="control-group">
-      <label>Filter by person</label>
-      <select id="personFilter">
-        <option value="">All workers</option>
-        <option value="Petar Radakovic">Petar Radakovic</option><option value="Nikola Ristić">Nikola Ristić</option><option value="Nikola Petrov">Nikola Petrov</option><option value="Ivan Mladenovski">Ivan Mladenovski</option><option value="Djordje Krstic">Djordje Krstic</option><option value="Aleksandar Trajkovic">Aleksandar Trajkovic</option>
-      </select>
+      <label for="personFilter">Filter by person</label>
+      <select id="personFilter"><option value="">All workers</option></select>
     </div>
     <div class="control-group">
-      <label>Filter by week</label>
-      <select id="weekFilter">
-        <option value="">All weeks</option>
-        <option value="-1">Pre-week</option><option value="0">Week 1</option><option value="1">Week 2</option><option value="2">Week 3</option><option value="3">Week 4</option><option value="4">Week 5</option>
-      </select>
+      <label for="weekFilter">Filter by week</label>
+      <select id="weekFilter"><option value="">All weeks</option></select>
     </div>
     <div class="control-group">
-      <label>Display time zone</label>
-      <select id="tzFilter">
-        <option value="ISR">Israel time (default)</option>
-        <option value="SRB">Serbia time</option>
-        <option value="USE">US time (Eastern)</option>
-        <option value="UTC">UTC</option>
+      <label for="tzSelect">Display time zone</label>
+      <select id="tzSelect">
+        <option value="israel">Israel time</option>
+        <option value="serbia">Serbia time</option>
+        <option value="us">US time (Eastern)</option>
+        <option value="utc">UTC</option>
       </select>
     </div>
-    <div class="control-group">
-      <label>Theme</label>
-      <select id="themeSelect">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
-    <button class="clear-btn" onclick="clearFilters()">Clear filters</button>
-    <button class="clear-btn admin-btn" onclick="openAdminModal()">Admin</button>
-    <button class="clear-btn reset-btn" onclick="openResetModal()">Show original version</button>
+    <button class="btn" id="clearFiltersBtn">Clear filters</button>
+    <button class="btn" id="adminBtn">Admin</button>
+    <button class="btn btn-danger" id="resetBtn">Reset to default rotation</button>
   </div>
 
-  <div class="worker-key" id="workerKey"></div>
+  <div class="key-strip" id="keyStrip"></div>
 
-  <div class="summary" id="personSummary">
-    <h3 id="personSummaryTitle"></h3>
-    <div class="summary-stats">
-      <div class="stat isr"><div class="n" id="statIsr">0</div><div class="l">10:00-18:00 days</div></div>
-      <div class="stat us"><div class="n" id="statUs">0</div><div class="l">14:00-22:00 days</div></div>
-      <div class="stat off"><div class="n" id="statOff">0</div><div class="l">Days off</div></div>
-    </div>
-  </div>
-
-  <div class="legend">
-    <span class="dot isr"></span> 10:00-18:00 (Israel time)
-    <span class="dot us"></span> 14:00-22:00 (US time)
-    <span class="dot off"></span> Day off
-  </div>
+  <div class="summary" id="summaryPanel" style="display:none;"></div>
 
   <div class="calendar-scroll">
-  <table>
-    <tr>
-      <td></td>
-      <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-    </tr>
-    <tr class="weekrow" data-week="-1"><td class="weeklabel">Pre-week<br>01/08-01/08</td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="daycell" data-date="2026-08-01"><div class="daynum">Sat <span class="daynum-n">Aug 1</span></div><div class="slots" data-date="2026-08-01"></div><div class="offbadges" data-date="2026-08-01"></div></td></tr><tr class="weekrow" data-week="0"><td class="weeklabel">Week 1<br>02/08-08/08</td><td class="daycell" data-date="2026-08-02"><div class="daynum">Sun <span class="daynum-n">Aug 2</span></div><div class="slots" data-date="2026-08-02"></div><div class="offbadges" data-date="2026-08-02"></div></td><td class="daycell" data-date="2026-08-03"><div class="daynum">Mon <span class="daynum-n">Aug 3</span></div><div class="slots" data-date="2026-08-03"></div><div class="offbadges" data-date="2026-08-03"></div></td><td class="daycell" data-date="2026-08-04"><div class="daynum">Tue <span class="daynum-n">Aug 4</span></div><div class="slots" data-date="2026-08-04"></div><div class="offbadges" data-date="2026-08-04"></div></td><td class="daycell" data-date="2026-08-05"><div class="daynum">Wed <span class="daynum-n">Aug 5</span></div><div class="slots" data-date="2026-08-05"></div><div class="offbadges" data-date="2026-08-05"></div></td><td class="daycell" data-date="2026-08-06"><div class="daynum">Thu <span class="daynum-n">Aug 6</span></div><div class="slots" data-date="2026-08-06"></div><div class="offbadges" data-date="2026-08-06"></div></td><td class="daycell" data-date="2026-08-07"><div class="daynum">Fri <span class="daynum-n">Aug 7</span></div><div class="slots" data-date="2026-08-07"></div><div class="offbadges" data-date="2026-08-07"></div></td><td class="daycell" data-date="2026-08-08"><div class="daynum">Sat <span class="daynum-n">Aug 8</span></div><div class="slots" data-date="2026-08-08"></div><div class="offbadges" data-date="2026-08-08"></div></td></tr><tr class="weekrow" data-week="1"><td class="weeklabel">Week 2<br>09/08-15/08</td><td class="daycell" data-date="2026-08-09"><div class="daynum">Sun <span class="daynum-n">Aug 9</span></div><div class="slots" data-date="2026-08-09"></div><div class="offbadges" data-date="2026-08-09"></div></td><td class="daycell" data-date="2026-08-10"><div class="daynum">Mon <span class="daynum-n">Aug 10</span></div><div class="slots" data-date="2026-08-10"></div><div class="offbadges" data-date="2026-08-10"></div></td><td class="daycell" data-date="2026-08-11"><div class="daynum">Tue <span class="daynum-n">Aug 11</span></div><div class="slots" data-date="2026-08-11"></div><div class="offbadges" data-date="2026-08-11"></div></td><td class="daycell" data-date="2026-08-12"><div class="daynum">Wed <span class="daynum-n">Aug 12</span></div><div class="slots" data-date="2026-08-12"></div><div class="offbadges" data-date="2026-08-12"></div></td><td class="daycell" data-date="2026-08-13"><div class="daynum">Thu <span class="daynum-n">Aug 13</span></div><div class="slots" data-date="2026-08-13"></div><div class="offbadges" data-date="2026-08-13"></div></td><td class="daycell" data-date="2026-08-14"><div class="daynum">Fri <span class="daynum-n">Aug 14</span></div><div class="slots" data-date="2026-08-14"></div><div class="offbadges" data-date="2026-08-14"></div></td><td class="daycell" data-date="2026-08-15"><div class="daynum">Sat <span class="daynum-n">Aug 15</span></div><div class="slots" data-date="2026-08-15"></div><div class="offbadges" data-date="2026-08-15"></div></td></tr><tr class="weekrow" data-week="2"><td class="weeklabel">Week 3<br>16/08-22/08</td><td class="daycell" data-date="2026-08-16"><div class="daynum">Sun <span class="daynum-n">Aug 16</span></div><div class="slots" data-date="2026-08-16"></div><div class="offbadges" data-date="2026-08-16"></div></td><td class="daycell" data-date="2026-08-17"><div class="daynum">Mon <span class="daynum-n">Aug 17</span></div><div class="slots" data-date="2026-08-17"></div><div class="offbadges" data-date="2026-08-17"></div></td><td class="daycell" data-date="2026-08-18"><div class="daynum">Tue <span class="daynum-n">Aug 18</span></div><div class="slots" data-date="2026-08-18"></div><div class="offbadges" data-date="2026-08-18"></div></td><td class="daycell" data-date="2026-08-19"><div class="daynum">Wed <span class="daynum-n">Aug 19</span></div><div class="slots" data-date="2026-08-19"></div><div class="offbadges" data-date="2026-08-19"></div></td><td class="daycell" data-date="2026-08-20"><div class="daynum">Thu <span class="daynum-n">Aug 20</span></div><div class="slots" data-date="2026-08-20"></div><div class="offbadges" data-date="2026-08-20"></div></td><td class="daycell" data-date="2026-08-21"><div class="daynum">Fri <span class="daynum-n">Aug 21</span></div><div class="slots" data-date="2026-08-21"></div><div class="offbadges" data-date="2026-08-21"></div></td><td class="daycell" data-date="2026-08-22"><div class="daynum">Sat <span class="daynum-n">Aug 22</span></div><div class="slots" data-date="2026-08-22"></div><div class="offbadges" data-date="2026-08-22"></div></td></tr><tr class="weekrow" data-week="3"><td class="weeklabel">Week 4<br>23/08-29/08</td><td class="daycell" data-date="2026-08-23"><div class="daynum">Sun <span class="daynum-n">Aug 23</span></div><div class="slots" data-date="2026-08-23"></div><div class="offbadges" data-date="2026-08-23"></div></td><td class="daycell" data-date="2026-08-24"><div class="daynum">Mon <span class="daynum-n">Aug 24</span></div><div class="slots" data-date="2026-08-24"></div><div class="offbadges" data-date="2026-08-24"></div></td><td class="daycell" data-date="2026-08-25"><div class="daynum">Tue <span class="daynum-n">Aug 25</span></div><div class="slots" data-date="2026-08-25"></div><div class="offbadges" data-date="2026-08-25"></div></td><td class="daycell" data-date="2026-08-26"><div class="daynum">Wed <span class="daynum-n">Aug 26</span></div><div class="slots" data-date="2026-08-26"></div><div class="offbadges" data-date="2026-08-26"></div></td><td class="daycell" data-date="2026-08-27"><div class="daynum">Thu <span class="daynum-n">Aug 27</span></div><div class="slots" data-date="2026-08-27"></div><div class="offbadges" data-date="2026-08-27"></div></td><td class="daycell" data-date="2026-08-28"><div class="daynum">Fri <span class="daynum-n">Aug 28</span></div><div class="slots" data-date="2026-08-28"></div><div class="offbadges" data-date="2026-08-28"></div></td><td class="daycell" data-date="2026-08-29"><div class="daynum">Sat <span class="daynum-n">Aug 29</span></div><div class="slots" data-date="2026-08-29"></div><div class="offbadges" data-date="2026-08-29"></div></td></tr><tr class="weekrow" data-week="4"><td class="weeklabel">Week 5<br>30/08-31/08</td><td class="daycell" data-date="2026-08-30"><div class="daynum">Sun <span class="daynum-n">Aug 30</span></div><div class="slots" data-date="2026-08-30"></div><div class="offbadges" data-date="2026-08-30"></div></td><td class="daycell" data-date="2026-08-31"><div class="daynum">Mon <span class="daynum-n">Aug 31</span></div><div class="slots" data-date="2026-08-31"></div><div class="offbadges" data-date="2026-08-31"></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
-  </table>
+    <table id="calTable">
+      <thead>
+        <tr>
+          <th style="width:80px;">Week</th>
+          <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr>
+      </thead>
+      <tbody id="calBody"></tbody>
+    </table>
   </div>
+</div>
 
-  <div class="modal-overlay" id="adminOverlay">
-    <div class="modal-box" style="width:720px; max-width:95vw;">
-      <div id="adminLoginView">
-        <h3>Admin access</h3>
-        <p class="modal-sub">Enter the admin password to view shift counts per worker.</p>
-        <input type="password" id="adminPassInput" placeholder="Password" />
-        <div class="modal-error" id="adminError">Incorrect password.</div>
-        <div class="modal-actions">
-          <button class="modal-btn secondary" onclick="closeAdminModal()">Cancel</button>
-          <button class="modal-btn primary" onclick="checkAdminPassword()">Unlock</button>
+<!-- Admin modal -->
+<div class="modal-overlay" id="adminOverlay">
+  <div class="modal">
+    <button class="modal-close" id="adminCloseBtn">&times;</button>
+    <h3>Admin panel</h3>
+    <div id="adminGate">
+      <p class="note">Enter the admin password to view worked-day totals per worker. This is a lightweight client-side gate only — not real security, since the password check runs in this page's own JavaScript and anyone can view page source to see it.</p>
+      <div class="pw-row">
+        <input type="password" id="adminPw" placeholder="Password">
+        <button class="btn btn-primary" id="adminUnlockBtn">Unlock</button>
+      </div>
+      <p class="error-text" id="adminError">Incorrect password.</p>
+    </div>
+    <div id="adminContent" style="display:none;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+        <div class="control-group" style="max-width:200px;">
+          <label for="adminFromDate">From</label>
+          <input type="date" id="adminFromDate">
+        </div>
+        <div class="control-group" style="max-width:200px;">
+          <label for="adminToDate">To</label>
+          <input type="date" id="adminToDate">
         </div>
       </div>
-      <div id="adminStatsView" style="display:none;">
-        <h3>Admin - shift counts</h3>
-        <p class="modal-sub" id="adminRangeNote">Counts reflect the current schedule. Absences are tracked separately and not counted as worked.</p>
-        <div class="control-group" style="margin-bottom:10px; max-width:220px;">
-          <label>Month (this-month column)</label>
-          <select id="adminMonthFilter"></select>
-        </div>
-        <table class="admin-table">
-          <tr>
-            <th></th>
-            <th class="grp" colspan="5">This month</th>
-            <th class="grp sep-col" colspan="3">All-time (since first use)</th>
-          </tr>
-          <tr>
-            <th>Worker</th>
-            <th>Total days</th><th>Sun</th><th>Fri</th><th>US shifts</th><th>Absences</th>
-            <th class="sep-col">Sun</th><th>Fri</th><th>US shifts</th>
-          </tr>
-          <tbody id="adminTableBody"></tbody>
-        </table>
-        <p class="modal-sub" style="margin-top:10px;">"All-time" totals are built from this browser's saved history for every month you've opened on this device/browser - they won't include months viewed on a different computer.</p>
-        <div class="modal-actions">
-          <button class="modal-btn secondary" onclick="closeAdminModal()">Close</button>
-        </div>
-      </div>
+      <table class="admin-table" id="adminTable"></table>
+      <p class="note" id="adminNote"></p>
     </div>
   </div>
-
-  <div class="modal-overlay" id="resetOverlay">
-    <div class="modal-box" style="width:1240px; max-width:95vw; max-height:88vh; display:flex; flex-direction:column;">
-      <h3>Original version (read-only)</h3>
-      <p class="modal-sub">This is the originally generated rotation, before any manual reassignments or absence marks - shown here for reference only, in the same layout as the live schedule. This view can't be edited or restored from here.</p>
-      <div id="resetPreview" style="overflow:auto; flex:1;"></div>
-      <div class="modal-actions">
-        <button class="modal-btn secondary" onclick="closeResetModal()">Close</button>
-      </div>
-    </div>
-  </div>
-
-  </div>
+</div>
 
 <script>
-const WORKERS = ["Petar Radakovic", "Nikola Ristić", "Nikola Petrov", "Ivan Mladenovski", "Djordje Krstic", "Aleksandar Trajkovic"];
-const DEFAULT_COLORS = {"Petar Radakovic": "#ef4444", "Nikola Ristić": "#f59e0b", "Nikola Petrov": "#10b981", "Ivan Mladenovski": "#0ea5e9", "Djordje Krstic": "#8b5cf6", "Aleksandar Trajkovic": "#ec4899"};
-const DEFAULT_DATA = {"2026-08-01": [], "2026-08-02": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}], "2026-08-03": [{"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Petar Radakovic"}], "2026-08-04": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Ristić"}], "2026-08-05": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Petrov"}], "2026-08-06": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Ivan Mladenovski"}], "2026-08-07": [{"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Ivan Mladenovski"}], "2026-08-08": [], "2026-08-09": [{"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}], "2026-08-10": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Djordje Krstic"}], "2026-08-11": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "US", "worker": "Aleksandar Trajkovic"}], "2026-08-12": [{"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Petar Radakovic"}], "2026-08-13": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Ristić"}], "2026-08-14": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "US", "worker": "Nikola Ristić"}], "2026-08-15": [], "2026-08-16": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}], "2026-08-17": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Petrov"}], "2026-08-18": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Ivan Mladenovski"}], "2026-08-19": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Djordje Krstic"}], "2026-08-20": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "US", "worker": "Aleksandar Trajkovic"}], "2026-08-21": [{"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "US", "worker": "Aleksandar Trajkovic"}], "2026-08-22": [], "2026-08-23": [{"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}], "2026-08-24": [{"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Petar Radakovic"}], "2026-08-25": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Ristić"}], "2026-08-26": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Nikola Petrov"}], "2026-08-27": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Djordje Krstic"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Ivan Mladenovski"}], "2026-08-28": [{"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "US", "worker": "Petar Radakovic"}], "2026-08-29": [], "2026-08-30": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}], "2026-08-31": [{"role": "ISR", "worker": "Petar Radakovic"}, {"role": "ISR", "worker": "Nikola Ristić"}, {"role": "ISR", "worker": "Nikola Petrov"}, {"role": "ISR", "worker": "Ivan Mladenovski"}, {"role": "ISR", "worker": "Aleksandar Trajkovic"}, {"role": "US", "worker": "Djordje Krstic"}]};
-const CURRENT_MONTH = "2026-08";
-const STORAGE_KEY = "src_schedule_data_" + CURRENT_MONTH;
-const ABSENT_KEY = "src_schedule_absent_" + CURRENT_MONTH;
-const COLOR_KEY = "src_worker_color_overrides";
-const THEME_KEY = "src_theme_pref";
+const DATA = {"workers": ["Petar Radakovic", "Nikola Ristić", "Nikola Petrov", "Ivan Mladenovski", "Djordje Krstic", "Aleksandar Trajkovic"], "colors": ["#ef4444", "#f59e0b", "#10b981", "#0ea5e9", "#8b5cf6", "#ec4899"], "schedule": {"2026-08-01": {"dow": 6, "week": null, "slots": []}, "2026-08-02": {"dow": 0, "week": null, "slots": [{"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}]}, "2026-08-03": {"dow": 1, "week": null, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-04": {"dow": 2, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-05": {"dow": 3, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-06": {"dow": 4, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-07": {"dow": 5, "week": null, "slots": [{"t": "PM", "w": 4}, {"t": "AM", "w": 5}, {"t": "AM", "w": 0}]}, "2026-08-08": {"dow": 6, "week": null, "slots": []}, "2026-08-09": {"dow": 0, "week": null, "slots": [{"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}]}, "2026-08-10": {"dow": 1, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-11": {"dow": 2, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "PM", "w": 5}]}, "2026-08-12": {"dow": 3, "week": null, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-13": {"dow": 4, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-14": {"dow": 5, "week": null, "slots": [{"t": "AM", "w": 5}, {"t": "PM", "w": 0}, {"t": "AM", "w": 1}]}, "2026-08-15": {"dow": 6, "week": null, "slots": []}, "2026-08-16": {"dow": 0, "week": null, "slots": [{"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-17": {"dow": 1, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-18": {"dow": 2, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-19": {"dow": 3, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-20": {"dow": 4, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "PM", "w": 5}]}, "2026-08-21": {"dow": 5, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}]}, "2026-08-22": {"dow": 6, "week": null, "slots": []}, "2026-08-23": {"dow": 0, "week": null, "slots": [{"t": "AM", "w": 4}, {"t": "AM", "w": 5}, {"t": "AM", "w": 0}]}, "2026-08-24": {"dow": 1, "week": null, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-25": {"dow": 2, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-26": {"dow": 3, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-27": {"dow": 4, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-08-28": {"dow": 5, "week": null, "slots": [{"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}]}, "2026-08-29": {"dow": 6, "week": null, "slots": []}, "2026-08-30": {"dow": 0, "week": null, "slots": [{"t": "AM", "w": 5}, {"t": "AM", "w": 0}, {"t": "AM", "w": 1}]}, "2026-08-31": {"dow": 1, "week": null, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-01": {"dow": 2, "week": -1, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-02": {"dow": 3, "week": -1, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-03": {"dow": 4, "week": -1, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-04": {"dow": 5, "week": -1, "slots": [{"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-05": {"dow": 6, "week": -1, "slots": []}, "2026-09-06": {"dow": 0, "week": 0, "slots": [{"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-07": {"dow": 1, "week": 0, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-08": {"dow": 2, "week": 0, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-09": {"dow": 3, "week": 0, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "PM", "w": 5}]}, "2026-09-10": {"dow": 4, "week": 0, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-11": {"dow": 5, "week": 0, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}]}, "2026-09-12": {"dow": 6, "week": 0, "slots": []}, "2026-09-13": {"dow": 0, "week": 1, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}]}, "2026-09-14": {"dow": 1, "week": 1, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-15": {"dow": 2, "week": 1, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-16": {"dow": 3, "week": 1, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-17": {"dow": 4, "week": 1, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-18": {"dow": 5, "week": 1, "slots": [{"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-19": {"dow": 6, "week": 1, "slots": []}, "2026-09-20": {"dow": 0, "week": 2, "slots": [{"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-21": {"dow": 1, "week": 2, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "PM", "w": 5}]}, "2026-09-22": {"dow": 2, "week": 2, "slots": [{"t": "PM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-23": {"dow": 3, "week": 2, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-24": {"dow": 4, "week": 2, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "PM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-25": {"dow": 5, "week": 2, "slots": [{"t": "AM", "w": 0}, {"t": "PM", "w": 1}, {"t": "AM", "w": 2}]}, "2026-09-26": {"dow": 6, "week": 2, "slots": []}, "2026-09-27": {"dow": 0, "week": 3, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}]}, "2026-09-28": {"dow": 1, "week": 3, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "PM", "w": 3}, {"t": "AM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-29": {"dow": 2, "week": 3, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "PM", "w": 4}, {"t": "AM", "w": 5}]}, "2026-09-30": {"dow": 3, "week": 3, "slots": [{"t": "AM", "w": 0}, {"t": "AM", "w": 1}, {"t": "AM", "w": 2}, {"t": "AM", "w": 3}, {"t": "AM", "w": 4}, {"t": "PM", "w": 5}]}}, "weeks": [{"cols": [null, null, "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05"], "label": "01/09-05/09"}, {"cols": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12"], "label": "06/09-12/09"}, {"cols": ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19"], "label": "13/09-19/09"}, {"cols": ["2026-09-20", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26"], "label": "20/09-26/09"}, {"cols": ["2026-09-27", "2026-09-28", "2026-09-29", "2026-09-30", null, null, null], "label": "27/09-30/09"}], "month": 9, "year": 2026};
 
-const PALETTE = ["#ef4444","#f97316","#f59e0b","#eab308","#84cc16","#10b981","#14b8a6","#0ea5e9","#3b82f6","#6366f1","#8b5cf6","#a855f7","#ec4899","#f43f5e","#64748b"];
+const STORAGE_KEY = "src_schedule_september_2026";
+const DOW_ABBR = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const TZ_OFFSETS = { israel: 3, serbia: 2, us: -4, utc: 0 }; /* Israel IDT (UTC+3), Serbia CEST (UTC+2), US EDT (UTC-4) - all apply for September 2026 */
+const BASE_RANGES = { AM: [10,0,18,0], PM: [14,0,22,0] };
+const ADMIN_PASSWORD = "WSCadmin";
 
-let WORKER_COLORS = Object.assign({}, DEFAULT_COLORS);
-try {
-  const raw = localStorage.getItem(COLOR_KEY);
-  if (raw) Object.assign(WORKER_COLORS, JSON.parse(raw));
-} catch (e) {}
+let state = { assign: {}, absent: {} };
 
-function loadData() {
-  try {
+function loadState(){
+  try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    if(raw){
+      const parsed = JSON.parse(raw);
+      state = { assign: parsed.assign || {}, absent: parsed.absent || {} };
+    }
+  }catch(e){ state = { assign:{}, absent:{} }; }
 }
 
-function loadAbsences() {
-  try {
-    const raw = localStorage.getItem(ABSENT_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
-  return {};
-}
-
-let scheduleData = loadData();
-let absentData = loadAbsences();
-
-function saveData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scheduleData));
-    localStorage.setItem(ABSENT_KEY, JSON.stringify(absentData));
+let saveTimer = null;
+function saveState(flash){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if(flash){
     const tag = document.getElementById('savedTag');
     tag.classList.add('show');
-    clearTimeout(window._savedTimeout);
-    window._savedTimeout = setTimeout(() => tag.classList.remove('show'), 1200);
-  } catch (e) {}
-}
-saveData(); // ensure this month is recorded immediately so Admin "all-time" scanning can find it even before any edits
-
-function buildResetPreview() {
-  const box = document.getElementById("resetPreview");
-  const dowNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const monthAbbr = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-  const dates = Object.keys(DEFAULT_DATA).sort();
-  const weekMap = {}; // sundayIso -> {0..6: dateIso}
-  dates.forEach(iso => {
-    const d = new Date(iso + "T00:00:00");
-    const dow = d.getDay();
-    const sunday = new Date(d);
-    sunday.setDate(d.getDate() - dow);
-    const wk = sunday.toISOString().slice(0, 10);
-    if (!weekMap[wk]) weekMap[wk] = {};
-    weekMap[wk][dow] = iso;
-  });
-  const weekKeys = Object.keys(weekMap).sort();
-
-  let html = '<table style="border-collapse:separate;border-spacing:4px;width:100%;min-width:1180px;table-layout:fixed;">';
-  html += '<tr><td></td>' + dowNames.map(n => '<th>' + n + '</th>').join('') + '</tr>';
-  weekKeys.forEach(wk => {
-    const row = weekMap[wk];
-    const rowDates = Object.values(row);
-    const range = rowDates.length ? (new Date(rowDates[0]+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"}) + "-" + new Date(rowDates[rowDates.length-1]+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"2-digit"})) : "";
-    html += '<tr><td class="weeklabel">' + range + '</td>';
-    for (let dow = 0; dow < 7; dow++) {
-      const iso = row[dow];
-      if (!iso) { html += '<td class="empty"></td>'; continue; }
-      const d = new Date(iso + "T00:00:00");
-      const slots = DEFAULT_DATA[iso] || [];
-      html += '<td class="daycell"><div class="daynum">' + dowNames[dow] + ' <span class="daynum-n">' + monthAbbr[d.getMonth()] + ' ' + d.getDate() + '</span></div><div class="slots">';
-      if (slots.length === 0) {
-        html += '<div class="all-off">Everyone off</div>';
-      } else {
-        slots.forEach(s => {
-          const roleClass = s.role === "US" ? "us" : "isr";
-          const timeRange = formatTime(s.role, "ISR");
-          const color = WORKER_COLORS[s.worker] || "#94a3b8";
-          html += '<div class="slot-row"><span class="slot-badge ' + roleClass + '">' + timeRange + '</span>' +
-            '<span style="flex:1;text-align:center;font-size:var(--slot-font);font-weight:600;border-left:4px solid ' + color + ';border-radius:5px;padding:4px;background:' + (s.role === "US" ? "#ede9fe" : "#dbeafe") + ';color:' + (s.role === "US" ? "#4c1d95" : "#1e3a8a") + ';">' + s.worker + '</span></div>';
-        });
-      }
-      const assigned = new Set(slots.map(s => s.worker));
-      const off = WORKERS.filter(w => !assigned.has(w));
-      if (slots.length > 0 && off.length) {
-        html += '<div class="offbadges">' + off.map(w => '<span class="offbadge"><span class="offbadge-dot" style="background:' + (WORKER_COLORS[w]||"#94a3b8") + '"></span>' + w + ' - OFF</span>').join('') + '</div>';
-      }
-      html += '</div></td>';
-    }
-    html += '</tr>';
-  });
-  html += '</table>';
-  box.innerHTML = html;
-}
-
-function openResetModal() {
-  buildResetPreview();
-  document.getElementById("resetOverlay").classList.add("show");
-}
-function closeResetModal() { document.getElementById("resetOverlay").classList.remove("show"); }
-document.getElementById("resetOverlay").addEventListener("click", (e) => {
-  if (e.target.id === "resetOverlay") closeResetModal();
-});
-
-function setTheme(t) {
-  document.documentElement.setAttribute("data-theme", t);
-  try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
-  const sel = document.getElementById("themeSelect");
-  if (sel) sel.value = t;
-}
-document.getElementById("themeSelect").addEventListener("change", (e) => setTheme(e.target.value));
-(function initTheme() {
-  let pref = "light";
-  try { pref = localStorage.getItem(THEME_KEY) || "light"; } catch (e) {}
-  setTheme(pref);
-})();
-
-document.documentElement.setAttribute("data-size", "medium");
-
-function formatTime(role, tz) {
-  const ROLE_BASE_OFFSET = { ISR: 3, US: 3 };
-  const ROLE_BASE_HOURS = { ISR: [10, 18], US: [14, 22] };
-  const TZ_OFFSETS = { ISR: 3, SRB: 2, USE: -4, UTC: 0 };
-  const baseOffset = ROLE_BASE_OFFSET[role];
-  const targetOffset = TZ_OFFSETS[tz];
-  const diff = targetOffset - baseOffset;
-  const [bs, be] = ROLE_BASE_HOURS[role];
-  const s = ((bs + diff) % 24 + 24) % 24;
-  const e = ((be + diff) % 24 + 24) % 24;
-  const pad = (n) => String(n).padStart(2, "0");
-  let label = pad(s) + ":00-" + pad(e) + ":00";
-  if (e <= s) label += " (+1)";
-  return label;
-}
-
-function renderWorkerKey() {
-  const container = document.getElementById("workerKey");
-  container.innerHTML = "";
-  WORKERS.forEach(w => {
-    const wrap = document.createElement("div");
-    wrap.className = "wkey";
-    const dot = document.createElement("span");
-    dot.className = "wkey-dot";
-    dot.style.background = WORKER_COLORS[w];
-    dot.title = "Click to change " + w + "'s color";
-    const palette = document.createElement("div");
-    palette.className = "palette";
-    PALETTE.forEach(c => {
-      const sw = document.createElement("span");
-      sw.className = "swatch";
-      sw.style.background = c;
-      sw.addEventListener("click", (e) => {
-        e.stopPropagation();
-        WORKER_COLORS[w] = c;
-        try {
-          const raw = localStorage.getItem(COLOR_KEY);
-          const obj = raw ? JSON.parse(raw) : {};
-          obj[w] = c;
-          localStorage.setItem(COLOR_KEY, JSON.stringify(obj));
-        } catch (err) {}
-        palette.classList.remove("show");
-        renderWorkerKey();
-        render();
-      });
-      palette.appendChild(sw);
-    });
-    dot.addEventListener("click", (e) => {
-      e.stopPropagation();
-      document.querySelectorAll(".palette").forEach(p => { if (p !== palette) p.classList.remove("show"); });
-      palette.classList.toggle("show");
-    });
-    const label = document.createElement("span");
-    label.textContent = w;
-    wrap.appendChild(dot);
-    wrap.appendChild(palette);
-    wrap.appendChild(label);
-    container.appendChild(wrap);
-  });
-}
-document.addEventListener("click", () => {
-  document.querySelectorAll(".palette").forEach(p => p.classList.remove("show"));
-});
-
-function render() {
-  document.querySelectorAll(".slots").forEach(container => {
-    const date = container.getAttribute("data-date");
-    const slots = scheduleData[date] || [];
-    container.innerHTML = "";
-    const tz = document.getElementById("tzFilter").value;
-    slots.forEach((slot, idx) => {
-      const roleClass = slot.role === "US" ? "us" : "isr";
-      const timeRange = formatTime(slot.role, tz);
-      const rowDiv = document.createElement("div");
-      rowDiv.className = "slot-row";
-      rowDiv.setAttribute("data-date", date);
-      rowDiv.setAttribute("data-idx", idx);
-
-      const badge = document.createElement("span");
-      badge.className = "slot-badge " + roleClass;
-      badge.textContent = timeRange;
-      rowDiv.appendChild(badge);
-
-      const key = date + "|" + idx;
-      if (absentData[key]) {
-        const box = document.createElement("div");
-        box.className = "absent-box";
-        box.innerHTML = '<span class="absent-name">' + slot.worker + '</span><span class="absent-reason">Absence</span><span class="absent-undo">Undo</span>';
-        box.addEventListener("click", () => {
-          delete absentData[key];
-          render();
-          applyFilters();
-          saveData();
-        });
-        rowDiv.classList.add("absent");
-        rowDiv.appendChild(box);
-      } else {
-        const select = document.createElement("select");
-        select.className = roleClass;
-        WORKERS.forEach(w => {
-          const o = document.createElement("option");
-          o.value = w;
-          o.textContent = w;
-          if (w === slot.worker) o.selected = true;
-          select.appendChild(o);
-        });
-        select.style.borderLeft = "4px solid " + (WORKER_COLORS[slot.worker] || "#94a3b8");
-        select.addEventListener("change", (e) => {
-          scheduleData[date][idx].worker = e.target.value;
-          select.style.borderLeft = "4px solid " + (WORKER_COLORS[e.target.value] || "#94a3b8");
-          renderOffBadges(date);
-          checkDuplicates(date);
-          applyFilters();
-          saveData();
-        });
-        select.addEventListener("dblclick", (e) => {
-          e.preventDefault();
-          absentData[key] = true;
-          render();
-          applyFilters();
-          saveData();
-        });
-        rowDiv.appendChild(select);
-      }
-      container.appendChild(rowDiv);
-    });
-  });
-  document.querySelectorAll(".offbadges").forEach(el => {
-    renderOffBadges(el.getAttribute("data-date"));
-  });
-  Object.keys(scheduleData).forEach(checkDuplicates);
-}
-
-function renderOffBadges(date) {
-  const container = document.querySelector('.offbadges[data-date="' + date + '"]');
-  if (!container) return;
-  const slots = scheduleData[date] || [];
-  const assigned = new Set(slots.map(s => s.worker));
-  const offWorkers = WORKERS.filter(w => !assigned.has(w));
-  container.innerHTML = "";
-  if (slots.length === 0) {
-    const tag = document.createElement("div");
-    tag.className = "all-off";
-    tag.textContent = "Everyone off";
-    container.appendChild(tag);
-    return;
-  }
-  offWorkers.forEach(w => {
-    const b = document.createElement("span");
-    b.className = "offbadge";
-    b.setAttribute("data-worker", w);
-    b.innerHTML = '<span class="offbadge-dot" style="background:' + (WORKER_COLORS[w] || "#94a3b8") + '"></span>' + w + " - OFF";
-    container.appendChild(b);
-  });
-}
-
-function checkDuplicates(date) {
-  const rows = document.querySelectorAll('.slot-row[data-date="' + date + '"]');
-  const counts = {};
-  rows.forEach(r => {
-    const sel = r.querySelector("select");
-    if (!sel) return;
-    counts[sel.value] = (counts[sel.value] || 0) + 1;
-  });
-  rows.forEach(r => {
-    const sel = r.querySelector("select");
-    const existingTag = r.querySelector(".dup-tag");
-    if (existingTag) existingTag.remove();
-    if (!sel) { r.classList.remove("dup"); return; }
-    if (counts[sel.value] > 1) {
-      r.classList.add("dup");
-      const tag = document.createElement("span");
-      tag.className = "dup-tag";
-      tag.textContent = "2x";
-      r.appendChild(tag);
-    } else {
-      r.classList.remove("dup");
-    }
-  });
-}
-
-function applyFilters() {
-  const person = document.getElementById("personFilter").value;
-  const week = document.getElementById("weekFilter").value;
-
-  document.querySelectorAll(".weekrow").forEach(tr => {
-    const wk = tr.getAttribute("data-week");
-    tr.classList.toggle("hidden-week", !(week === "" || wk === week));
-  });
-
-  document.querySelectorAll(".slot-row").forEach(row => {
-    const sel = row.querySelector("select");
-    const absentBox = row.querySelector(".absent-name");
-    const currentName = sel ? sel.value : (absentBox ? absentBox.textContent : "");
-    const match = person === "" || currentName === person;
-    row.classList.toggle("hidden-row", !match);
-  });
-
-  document.querySelectorAll(".offbadge").forEach(badge => {
-    const w = badge.getAttribute("data-worker");
-    const match = person === "" || w === person;
-    badge.classList.toggle("hidden-row", !match);
-    badge.classList.toggle("highlight", person !== "" && w === person);
-  });
-
-  updateSummary();
-}
-
-function updateSummary() {
-  const person = document.getElementById("personFilter").value;
-  const panel = document.getElementById("personSummary");
-  if (!person) {
-    panel.classList.remove("show");
-    return;
-  }
-  const week = document.getElementById("weekFilter").value;
-  let isr = 0, us = 0, off = 0;
-  Object.keys(scheduleData).forEach(date => {
-    if (week !== "") {
-      const cell = document.querySelector('.daycell[data-date="' + date + '"]');
-      if (!cell) return;
-      const tr = cell.closest(".weekrow");
-      if (!tr || tr.getAttribute("data-week") !== week) return;
-    }
-    const slots = scheduleData[date] || [];
-    const idx = slots.findIndex(s => s.worker === person);
-    if (idx === -1) { off++; return; }
-    const key = date + "|" + idx;
-    if (absentData[key]) { off++; return; }
-    if (slots[idx].role === "US") us++; else isr++;
-  });
-  document.getElementById("personSummaryTitle").textContent = person + (week !== "" ? " - selected week" : " - full month");
-  document.getElementById("statIsr").textContent = isr;
-  document.getElementById("statUs").textContent = us;
-  document.getElementById("statOff").textContent = off;
-  panel.classList.add("show");
-}
-
-document.getElementById("personFilter").addEventListener("change", applyFilters);
-document.getElementById("weekFilter").addEventListener("change", applyFilters);
-document.getElementById("tzFilter").addEventListener("change", () => { render(); applyFilters(); });
-
-function clearFilters() {
-  document.getElementById("personFilter").value = "";
-  document.getElementById("weekFilter").value = "";
-  applyFilters();
-}
-
-render();
-applyFilters();
-renderWorkerKey();
-
-// ---------- Admin ----------
-const ADMIN_PASSWORD = "WSCadmin";
-let adminUnlocked = false;
-
-function openAdminModal() {
-  document.getElementById("adminOverlay").classList.add("show");
-  document.getElementById("adminError").classList.remove("show");
-  if (adminUnlocked) {
-    showAdminStats();
-  } else {
-    document.getElementById("adminLoginView").style.display = "block";
-    document.getElementById("adminStatsView").style.display = "none";
-    document.getElementById("adminPassInput").value = "";
-    setTimeout(() => document.getElementById("adminPassInput").focus(), 50);
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(()=>tag.classList.remove('show'), 1400);
   }
 }
-function closeAdminModal() { document.getElementById("adminOverlay").classList.remove("show"); }
-function checkAdminPassword() {
-  const val = document.getElementById("adminPassInput").value;
-  if (val === ADMIN_PASSWORD) {
-    adminUnlocked = true;
-    showAdminStats();
-  } else {
-    document.getElementById("adminError").classList.add("show");
-  }
-}
-document.getElementById("adminPassInput").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") checkAdminPassword();
-});
-document.getElementById("adminOverlay").addEventListener("click", (e) => {
-  if (e.target.id === "adminOverlay") closeAdminModal();
-});
 
-function todayIso() {
+function slotKey(date, idx){ return date + "#" + idx; }
+
+function getAssignedWorker(date, idx){
+  const key = slotKey(date, idx);
+  if(Object.prototype.hasOwnProperty.call(state.assign, key)) return state.assign[key];
+  return DATA.schedule[date].slots[idx].w;
+}
+
+function isAbsent(date, idx){
+  return !!state.absent[slotKey(date, idx)];
+}
+
+function setAssignedWorker(date, idx, workerIdx){
+  state.assign[slotKey(date, idx)] = workerIdx;
+  saveState(true);
+}
+
+function toggleAbsent(date, idx){
+  const key = slotKey(date, idx);
+  state.absent[key] = !state.absent[key];
+  saveState(true);
+}
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function shiftTime(h, m, diffHours){
+  let total = h*60 + m + diffHours*60;
+  const dayDelta = Math.floor(total/1440);
+  const norm = ((total % 1440) + 1440) % 1440;
+  return { hh: Math.floor(norm/60), mm: norm % 60, dayDelta };
+}
+
+function daySuffix(delta){
+  if(delta === 0) return "";
+  return delta > 0 ? ` (+${delta})` : ` (${delta})`;
+}
+
+function formatRange(t, tzKey){
+  const diff = TZ_OFFSETS[tzKey] - TZ_OFFSETS.israel;
+  const [sh,sm,eh,em] = BASE_RANGES[t];
+  const s = shiftTime(sh,sm,diff);
+  const e = shiftTime(eh,em,diff);
+  return `${pad(s.hh)}:${pad(s.mm)}${daySuffix(s.dayDelta)}-${pad(e.hh)}:${pad(e.mm)}${daySuffix(e.dayDelta)}`;
+}
+
+function todayISO(){
   const d = new Date();
-  const pad = (n) => String(n).padStart(2, "0");
-  return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
 }
 
-function computeStatsForData(dataObj, absentObj) {
-  const stats = {};
-  WORKERS.forEach(w => { stats[w] = { total: 0, us: 0, sunday: 0, friday: 0, absent: 0 }; });
-  const today = todayIso();
-  Object.keys(dataObj || {}).forEach(date => {
-    if (date > today) return;
-    const dow = new Date(date + "T00:00:00").getDay();
-    const slots = dataObj[date] || [];
-    slots.forEach((slot, idx) => {
-      const key = date + "|" + idx;
-      if (!stats[slot.worker]) return;
-      if (absentObj && absentObj[key]) {
-        stats[slot.worker].absent++;
+function buildWorkerSelectOptions(selectedIdx){
+  return DATA.workers.map((name,i)=>`<option value="${i}" ${i===selectedIdx?'selected':''}>${name}</option>`).join('');
+}
+
+function renderKeyStrip(){
+  const el = document.getElementById('keyStrip');
+  el.innerHTML = DATA.workers.map((name,i)=>`
+    <div class="key-item"><span class="dot" style="background:${DATA.colors[i]}"></span>${name}</div>
+  `).join('');
+}
+
+function populateFilterDropdowns(){
+  const personSel = document.getElementById('personFilter');
+  DATA.workers.forEach((name,i)=>{
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = name;
+    personSel.appendChild(opt);
+  });
+  const weekSel = document.getElementById('weekFilter');
+  DATA.weeks.forEach((w,i)=>{
+    const opt = document.createElement('option');
+    opt.value = w.label;
+    opt.textContent = `Week ${i+1} (${w.label})`;
+    weekSel.appendChild(opt);
+  });
+}
+
+function renderCalendar(){
+  const tzKey = document.getElementById('tzSelect').value;
+  const personFilterVal = document.getElementById('personFilter').value;
+  const weekFilterVal = document.getElementById('weekFilter').value;
+  const personFilter = personFilterVal === "" ? null : parseInt(personFilterVal,10);
+
+  const body = document.getElementById('calBody');
+  body.innerHTML = '';
+
+  DATA.weeks.forEach((week, wIdx)=>{
+    const tr = document.createElement('tr');
+    tr.className = 'weekrow';
+    if(weekFilterVal && weekFilterVal !== week.label){
+      tr.style.display = 'none';
+    }
+    const labelTd = document.createElement('td');
+    labelTd.className = 'week-label-cell';
+    labelTd.innerHTML = `Week ${wIdx+1}<br>${week.label}`;
+    tr.appendChild(labelTd);
+
+    week.cols.forEach((date)=>{
+      const td = document.createElement('td');
+      if(!date){
+        td.className = 'empty';
+        tr.appendChild(td);
         return;
       }
-      stats[slot.worker].total++;
-      if (slot.role === "US") stats[slot.worker].us++;
-      if (dow === 0) stats[slot.worker].sunday++;
-      if (dow === 5) stats[slot.worker].friday++;
+      const info = DATA.schedule[date];
+      const d = new Date(date + "T00:00:00");
+      const header = `${DOW_ABBR[info.dow]} ${MONTH_ABBR[DATA.month-1]} ${d.getDate()}`;
+      let html = `<div class="day-header">${header}</div>`;
+
+      if(info.slots.length === 0){
+        html += `<div class="everyone-off">Everyone off</div>`;
+      } else {
+        /* compute currently assigned workers + duplicate detection */
+        const assignedList = info.slots.map((s,idx)=>getAssignedWorker(date, idx));
+        const dupCount = {};
+        assignedList.forEach(w=>{ dupCount[w] = (dupCount[w]||0)+1; });
+
+        info.slots.forEach((s, idx)=>{
+          const worker = assignedList[idx];
+          const color = DATA.colors[worker];
+          const name = DATA.workers[worker];
+          const absent = isAbsent(date, idx);
+          const isDup = dupCount[worker] > 1;
+          const dimClass = (personFilter !== null && worker !== personFilter) ? ' dim' : '';
+          const dupClass = isDup ? ' dup-outline' : '';
+          const badgeClass = s.t === 'AM' ? 'badge-am' : 'badge-pm';
+          const timeLabel = formatRange(s.t, tzKey);
+
+          html += `<div class="slot${dimClass}${dupClass}" data-date="${date}" data-idx="${idx}">`;
+          html += `<span class="badge ${badgeClass}">${timeLabel}</span>`;
+          if(absent){
+            html += `<div class="absent-box" style="border-color:${color}">
+                        <span class="absent-name" style="color:${color}">${name}</span>
+                        <span class="absent-label">Absence</span>
+                        <button class="undo-btn" data-action="undo" data-date="${date}" data-idx="${idx}">Undo</button>
+                      </div>`;
+          } else {
+            html += `<select class="worker-select" data-action="assign" data-date="${date}" data-idx="${idx}" style="border-left-color:${color}">
+                        ${buildWorkerSelectOptions(worker)}
+                      </select>`;
+          }
+          if(isDup){ html += `<span class="dup-tag">2x</span>`; }
+          html += `</div>`;
+        });
+
+        /* off badges */
+        const workingSet = new Set(assignedList);
+        const offWorkers = DATA.workers.map((n,i)=>i).filter(i=>!workingSet.has(i));
+        if(offWorkers.length){
+          html += `<div class="off-badges">`;
+          offWorkers.forEach(i=>{
+            const hideClass = (personFilter !== null && i !== personFilter) ? ' hide-badge' : '';
+            html += `<div class="off-badge${hideClass}"><span class="dot" style="background:${DATA.colors[i]}"></span>${DATA.workers[i]} - OFF</div>`;
+          });
+          html += `</div>`;
+        }
+      }
+
+      td.innerHTML = html;
+      tr.appendChild(td);
+    });
+
+    body.appendChild(tr);
+  });
+
+  renderSummary(personFilter, weekFilterVal);
+}
+
+function renderSummary(personFilter, weekFilterVal){
+  const panel = document.getElementById('summaryPanel');
+  if(personFilter === null){
+    panel.style.display = 'none';
+    panel.innerHTML = '';
+    return;
+  }
+  let am=0, pm=0, off=0;
+  Object.keys(DATA.schedule).forEach(date=>{
+    const info = DATA.schedule[date];
+    const week = DATA.weeks.find(w=>w.cols.includes(date));
+    if(weekFilterVal && week.label !== weekFilterVal) return;
+    let found = null;
+    info.slots.forEach((s,idx)=>{
+      const w = getAssignedWorker(date, idx);
+      if(w === personFilter) found = s.t;
+    });
+    if(found === 'AM') am++;
+    else if(found === 'PM') pm++;
+    else off++;
+  });
+  panel.style.display = 'flex';
+  panel.innerHTML = `
+    <div class="stat-card"><div class="num">${am}</div><div class="label">10:00-18:00 days</div></div>
+    <div class="stat-card"><div class="num">${pm}</div><div class="label">14:00-22:00 days</div></div>
+    <div class="stat-card"><div class="num">${off}</div><div class="label">Days off</div></div>
+  `;
+}
+
+/* Event delegation for slot changes and absence toggling */
+document.getElementById('calBody').addEventListener('change', (e)=>{
+  const t = e.target;
+  if(t.classList.contains('worker-select')){
+    const date = t.dataset.date;
+    const idx = parseInt(t.dataset.idx,10);
+    setAssignedWorker(date, idx, parseInt(t.value,10));
+    renderCalendar();
+  }
+});
+
+document.getElementById('calBody').addEventListener('dblclick', (e)=>{
+  const sel = e.target.closest('.worker-select');
+  if(sel){
+    toggleAbsent(sel.dataset.date, parseInt(sel.dataset.idx,10));
+    renderCalendar();
+  }
+});
+
+document.getElementById('calBody').addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-action="undo"]');
+  if(btn){
+    toggleAbsent(btn.dataset.date, parseInt(btn.dataset.idx,10));
+    renderCalendar();
+  }
+});
+
+document.getElementById('personFilter').addEventListener('change', renderCalendar);
+document.getElementById('weekFilter').addEventListener('change', renderCalendar);
+document.getElementById('tzSelect').addEventListener('change', renderCalendar);
+
+document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
+  document.getElementById('personFilter').value = '';
+  document.getElementById('weekFilter').value = '';
+  renderCalendar();
+});
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  if(confirm('Reset the schedule to the default rotation? This clears all manual reassignments and absences saved on this device.')){
+    localStorage.removeItem(STORAGE_KEY);
+    state = { assign:{}, absent:{} };
+    renderCalendar();
+    saveState(true);
+  }
+});
+
+/* Admin panel */
+document.getElementById('adminBtn').addEventListener('click', ()=>{
+  document.getElementById('adminOverlay').classList.add('open');
+});
+document.getElementById('adminCloseBtn').addEventListener('click', ()=>{
+  document.getElementById('adminOverlay').classList.remove('open');
+});
+document.getElementById('adminOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'adminOverlay') document.getElementById('adminOverlay').classList.remove('open');
+});
+document.getElementById('adminUnlockBtn').addEventListener('click', unlockAdmin);
+document.getElementById('adminPw').addEventListener('keydown', (e)=>{ if(e.key==='Enter') unlockAdmin(); });
+
+function unlockAdmin(){
+  const val = document.getElementById('adminPw').value;
+  if(val === ADMIN_PASSWORD){
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    document.getElementById('adminError').style.display = 'none';
+    initAdminDateRange();
+    renderAdminTable();
+  } else {
+    document.getElementById('adminError').style.display = 'block';
+  }
+}
+
+function initAdminDateRange(){
+  const fromInput = document.getElementById('adminFromDate');
+  const toInput = document.getElementById('adminToDate');
+  if(fromInput.dataset.init) return; /* already set up */
+  fromInput.dataset.init = '1';
+  const allDates = Object.keys(DATA.schedule).sort();
+  const firstWorkingDay = allDates.find(d=>DATA.schedule[d].slots.length > 0) || allDates[0];
+  fromInput.min = allDates[0];
+  fromInput.max = allDates[allDates.length-1];
+  toInput.min = allDates[0];
+  toInput.max = allDates[allDates.length-1];
+  fromInput.value = firstWorkingDay;
+  toInput.value = allDates[allDates.length-1];
+  fromInput.addEventListener('change', renderAdminTable);
+  toInput.addEventListener('change', renderAdminTable);
+}
+
+function renderAdminTable(){
+  const fromVal = document.getElementById('adminFromDate').value;
+  const toVal = document.getElementById('adminToDate').value;
+  const stats = DATA.workers.map(()=>({ pm:0, friSun:0, absences:0 }));
+
+  Object.keys(DATA.schedule).sort().forEach(date=>{
+    if(fromVal && date < fromVal) return;
+    if(toVal && date > toVal) return;
+    const info = DATA.schedule[date];
+    info.slots.forEach((s, idx)=>{
+      const w = getAssignedWorker(date, idx);
+      const absent = isAbsent(date, idx);
+      if(absent){
+        stats[w].absences++;
+        return; /* not counted as worked */
+      }
+      if(s.t === 'PM') stats[w].pm++;
+      if(info.dow === 0 || info.dow === 5) stats[w].friSun++;
     });
   });
-  return stats;
-}
 
-function getAllMonthKeys() {
-  const keys = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (/^src_schedule_data_\d{4}-\d{2}$/.test(k)) keys.push(k);
-  }
-  return keys.sort();
-}
-
-function computeAllTimeStats() {
-  const combined = {};
-  WORKERS.forEach(w => { combined[w] = { total: 0, us: 0, sunday: 0, friday: 0, absent: 0 }; });
-  getAllMonthKeys().forEach(k => {
-    const monthTag = k.replace("src_schedule_data_", "");
-    let data;
-    try { data = JSON.parse(localStorage.getItem(k)); } catch (e) { return; }
-    let absent = {};
-    try { absent = JSON.parse(localStorage.getItem("src_schedule_absent_" + monthTag)) || {}; } catch (e) {}
-    const stats = computeStatsForData(data, absent);
-    WORKERS.forEach(w => {
-      combined[w].total += stats[w].total;
-      combined[w].us += stats[w].us;
-      combined[w].sunday += stats[w].sunday;
-      combined[w].friday += stats[w].friday;
-      combined[w].absent += stats[w].absent;
-    });
+  const table = document.getElementById('adminTable');
+  let html = `<thead><tr><th>Worker</th><th>US shifts</th><th>Weekend shifts (Fri+Sun)</th><th>Absences</th></tr></thead><tbody>`;
+  DATA.workers.forEach((name,i)=>{
+    html += `<tr><td class="name-cell">${name}</td><td>${stats[i].pm}</td><td>${stats[i].friSun}</td><td>${stats[i].absences}</td></tr>`;
   });
-  return combined;
+  html += `</tbody>`;
+  table.innerHTML = html;
+
+  document.getElementById('adminNote').textContent =
+    `Shows full totals for dates ${fromVal} through ${toVal} (default: day 1 of this schedule through its last day). "US shifts" = 14:00-22:00 slots worked. "Weekend shifts (Fri+Sun)" = combined count of Sunday and Friday shifts worked. Absences are tracked separately and are not counted toward either total. August figures reflect the default rotation only, not any manual edits from a separate August file.`;
 }
 
-function populateAdminMonthFilter() {
-  const sel = document.getElementById("adminMonthFilter");
-  const months = getAllMonthKeys().map(k => k.replace("src_schedule_data_", ""));
-  const current = sel.value || CURRENT_MONTH;
-  sel.innerHTML = "";
-  months.forEach(m => {
-    const o = document.createElement("option");
-    o.value = m;
-    const [y, mo] = m.split("-");
-    o.textContent = new Date(y + "-" + mo + "-01T00:00:00").toLocaleString("en-US", { month: "long", year: "numeric" });
-    sel.appendChild(o);
-  });
-  if (months.includes(current)) sel.value = current; else sel.value = CURRENT_MONTH;
-}
-
-function renderAdminTable() {
-  const monthTag = document.getElementById("adminMonthFilter").value || CURRENT_MONTH;
-  let monthData = scheduleData, monthAbsent = absentData;
-  if (monthTag !== CURRENT_MONTH) {
-    try { monthData = JSON.parse(localStorage.getItem("src_schedule_data_" + monthTag)) || {}; } catch (e) { monthData = {}; }
-    try { monthAbsent = JSON.parse(localStorage.getItem("src_schedule_absent_" + monthTag)) || {}; } catch (e) { monthAbsent = {}; }
-  }
-  const monthStats = computeStatsForData(monthData, monthAbsent);
-  const allTime = computeAllTimeStats();
-  const tbody = document.getElementById("adminTableBody");
-  tbody.innerHTML = "";
-  WORKERS.forEach(w => {
-    const m = monthStats[w];
-    const a = allTime[w];
-    const tr = document.createElement("tr");
-    tr.innerHTML =
-      '<td><span class="wkey-dot" style="width:12px;height:12px;background:' + (WORKER_COLORS[w]||"#94a3b8") + ';display:inline-block;margin-right:6px;vertical-align:middle;cursor:default;box-shadow:none;"></span>' + w + '</td>' +
-      '<td>' + m.total + '</td>' +
-      '<td>' + m.sunday + '</td>' +
-      '<td>' + m.friday + '</td>' +
-      '<td>' + m.us + '</td>' +
-      '<td>' + m.absent + '</td>' +
-      '<td class="sep-col">' + a.sunday + '</td>' +
-      '<td>' + a.friday + '</td>' +
-      '<td>' + a.us + '</td>';
-    tbody.appendChild(tr);
-  });
-  const today = todayIso();
-  document.getElementById("adminRangeNote").textContent =
-    "This-month counts run from day 1 through today (" + today + "). All-time totals combine every month recorded in this browser. Absences are tracked separately and not counted as worked.";
-}
-
-function showAdminStats() {
-  document.getElementById("adminLoginView").style.display = "none";
-  document.getElementById("adminStatsView").style.display = "block";
-  populateAdminMonthFilter();
-  renderAdminTable();
-}
-document.getElementById("adminMonthFilter").addEventListener("change", renderAdminTable);
+/* Init */
+loadState();
+renderKeyStrip();
+populateFilterDropdowns();
+renderCalendar();
 </script>
 </body>
 </html>
